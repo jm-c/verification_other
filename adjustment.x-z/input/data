@@ -77,6 +77,11 @@
 # Gridding parameters
  &PARM04
  usingCartesianGrid=.TRUE.,
+#- shift Z-axis up to allow to use same bathyFile 
+#  no problem with Linear EOS but need to worry about negative P in EOS
+#seaLev_Z= 125.,
+#- consitent shift in ref pressure (does not matter with Linear EOS):
+#top_Pres= -1.25E6,
  delR= 15*25.,
  delX=60*1.E3,
  delY= 1*1.E3,
@@ -85,6 +90,7 @@
 # Input datasets
  &PARM05
 #bathyFile = 'flat_bottom.bin',
+#topoFile  = 'zeros_x60.bin',
  bathyFile = 'flat_deep.bin',
  topoFile  = 'flat_top.bin',
  pSurfInitFile='Eta_ini.bin',

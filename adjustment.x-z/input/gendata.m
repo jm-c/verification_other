@@ -38,6 +38,9 @@ fprintf('dz= %3.0f , hBot= %4.0f , zTop= %4.0f , zDeep= %4.0f , zDeep-zTop= %4.0
 
 %return
 
+var=zeros(nx,1); namF=['zeros_x',int2str(nx),'.bin'];
+fid=fopen(namF,'w','b'); fwrite(fid,var,'real*8'); fclose(fid);
+
 var=-hBot*ones(nx,1);
 fid=fopen('flat_bottom.bin','w','b'); fwrite(fid,var,'real*8'); fclose(fid);
 
