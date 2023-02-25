@@ -1,0 +1,34 @@
+Here (in verification_other/global_oce_cs32/):
+
+Make executable (using geos-bulkf):
+> mkdir bld_geos ; cd bld_geos
+> ../../../tools/genmake2 -mods '../geos_blkf ../cod_tst' -of ../../linux_amd64_gfortran > genmake.tr_log
+#- Note: the order in "-mods" option matters ! since EXF_OPTIONS.h is in both,
+#        and we want to get a link to the one in "../geos_blkf"
+> make depend > make.tr_log
+> make >>& make.tr_log
+> ls -l mitgcmuv
+> cd ..
+
+Make reference executable (using Large & Yeager):
+> mkdir bld_ref ; cd bld_ref
+> ../../../tools/genmake2 -mods ../cod_tst -of ../../linux_amd64_gfortran > genmake.tr_log
+> make depend > make.tr_log
+> make >>& make.tr_log
+> ls -l mitgcmuv
+> cd ..
+
+Prepare run dir:
+> mkdir run_tst ; cd run_tst
+> ln -s ../inp_tst/* .
+> ./prepare_run
+> ln -s ../bld_geos/mitgcmuv .
+> ln -s ../bld_ref/mitgcmuv mitgcmuv.ref
+
+Run a short test:
+> ./mitgcmuv >& output.txt
+
+To check, can compare "output.txt" with: ../results/output.geos_blkf
+
+And to compare with Large & Yeager:
+> .mitgcmuv.ref >& output.ref
