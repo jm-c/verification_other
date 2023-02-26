@@ -1,3 +1,6 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! !IROUTINE: linadj
+! !INTERFACE:
       SUBROUTINE LINADJ ( VRIB1,VRIB2,VWS1,VWS2,VZ1,VUSTAR,IWATER, &
        VAPSIM, VAPSIHG,VPSIH,VPSIG,VX,VX0,VY,VY0,ITYPE,LWATER,IRUN, &
        VDZETA,VDZ0,VDPSIM,VDPSIH,INTRIB, &
