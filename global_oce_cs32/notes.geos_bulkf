@@ -32,3 +32,14 @@ To check, can compare "output.txt" with: ../results/output.geos_blkf
 
 And to compare with Large & Yeager:
 > .mitgcmuv.ref >& output.ref
+
+--------------------------------------------------------------------------------
+Note regarding origial code: MOsfclayer.F90.ori (in geos_blkf/)
+ Can put back the code into a single src file (+ undo miror changes)
+ that can be compared to original code:
+> cat helfsurface.F90 PHI.F90 PSI.F90 LINADJ.F90 ZCSUB.F90 | \
+  sed -e 's/ REAL\*8 / real /' -e 's/ REAL\*8, / real, /' -e 's/(\*)/(:)/g' \
+    > single_src_file
+> diff -b single_src_file MOsfclayer.F90.ori
+ shows only (very) few differences.
+--------------------------------------------------------------------------------
