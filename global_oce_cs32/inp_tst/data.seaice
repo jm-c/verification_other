@@ -2,11 +2,11 @@
  &SEAICE_PARM01
 #here I take the fields from pickup.seaice.previous.data that 
 #came out of experiment 2 ("relax") part 4 to initialize part 5
-      AreaFile='siAREA.ini',
-      HeffFile='siHEFF.ini',
-      HsnowFile='siHSNOW.ini',
-      uIceFile='siUICE.ini',
-      vIceFile='siVICE.ini',
+      AreaFile='siAREA.bin',
+      HeffFile='siHEFF.bin',
+      HsnowFile='siHSNOW.bin',
+#     uIceFile='siUICE.ini',
+#     vIceFile='siVICE.ini',
 #the following is needed to recover old default values
 #since PR116 (https://github.com/MITgcm/MITgcm/pull/116)
       SEAICE_drag=0.002,

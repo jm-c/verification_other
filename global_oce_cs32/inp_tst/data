@@ -72,7 +72,7 @@
  &PARM03
  nIter0=0,
 #- for testing:
- nTimeSteps=8,
+ nTimeSteps=2,
 #60 years with 1h dt
 #nTimeSteps=525985,
 #

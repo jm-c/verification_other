@@ -37,10 +37,11 @@
   frequency(2) = 2635200.0,
    filename(2) = 'dynDiag',
 #---
-  fields(1:11,3) = 'EXFhs   ','EXFhl   ','EXFqnet ',
-                   'EXFlwnet','EXFswnet','EXFevap ',
-                   'EXFtaux ','EXFtauy ',
-                   'EXFatemp','EXFaqh  ','EXFpreci',
+  fields(1:14,3) = 'EXFhs   ','EXFhl   ','SIarea  ',
+                   'EXFtaux ','EXFtauy ','EXFwspee',
+                   'EXFevap ','EXFempmr','EXFqnet ',
+                   'EXFlwnet','EXFswnet','THETA   ',
+                   'EXFatemp','EXFaqh  ',
   frequency(3) = 21600.0,
    filename(3) = 'exfDiag',
 #---
@@ -78,7 +79,7 @@
                        'UVEL    ','VVEL    ','WVEL    ',
                        'THETA   ','SALT    ',
     stat_fname(1)= 'dynStDiag',
-     stat_freq(1)= 14400.,
+     stat_freq(1)= 3600.,
 #---
  stat_fields(1:18,2) = 'ETAN    ','MXLDEPTH',
                        'atmPload','oceFWflx','oceQnet ','oceQsw  ',
@@ -86,12 +87,12 @@
                        'sIceLoad','SIarea  ','SIheff  ','SIhsnow ',
                        'SIatmFW ','SIatmQnt','THETA   ','SALT    ',
     stat_fname(2)= 'surfStDiag',
-     stat_freq(2)= 14400.,
+     stat_freq(2)= 3600.,
 #---
- stat_fields(1:14,3) = 'EXFtaux ','EXFtauy ','EXFqnet ','EXFempmr',
+ stat_fields(1:15,3) = 'EXFtaux ','EXFtauy ','EXFqnet ','EXFempmr',
                        'EXFhs   ','EXFhl   ','EXFlwnet','EXFswnet',
-                       'EXFevap ','EXFpreci','EXFroff ',
+                       'EXFwspee','EXFevap ','EXFpreci','EXFroff ',
                        'EXFpress','EXFatemp','EXFaqh  ',
     stat_fname(3)= 'exfStDiag',
-     stat_freq(3)= 14400.,
+     stat_freq(3)= 3600.,
  &

@@ -14,6 +14,7 @@
  useExfCheckRange  = .FALSE.,
  repeatPeriod      = 31536000.,
  useAtmWind        = .TRUE.,
+#diags_opOceWeighted = .FALSE.,
  &
 #
  &EXF_NML_02
