@@ -179,29 +179,19 @@ c         q10m(i,j), u10m(i,j), v10m(i,j), u50m(i,j), v50m(i,j)
 C--------------
            IF ( maskC(i,j,ks,bi,bj).EQ.oneRS ) THEN
             ij = ij+1
-C-   Turbulent Fluxes
-c         deltap(i,j) = atemp(i,j,bi,bj) + gamma_blk*ht - Tsf
-c         delq(i,j)   = aqh(i,j,bi,bj) - ssq
-c         tstar(i,j)  = rhn*deltap(i,j)
-c         qstar(i,j)  = ren*delq(i,j)
-c         tau(i,j)    = atmrho*rd(i,j)*wspeed(i,j,bi,bj)
-c         hs(i,j,bi,bj) = atmcp*tau(i,j)*tstar(i,j)
-c         hl(i,j,bi,bj) = flamb*tau(i,j)*qstar(i,j)
-            hs(i,j,bi,bj) = -atmcp*VKH(ij)*( VT2(ij)  - t2m(ij) )
-            hl(i,j,bi,bj) = -flamb*VKH(ij)*( VSH2(ij) - q2m(ij) )
-C   change sign and convert from kg/m^2/s to m/s via rhoConstFresh
-c         evap(i,j,bi,bj) = -recip_rhoConstFresh*tau(i,j)*qstar(i,j)
+C-   Turbulent Fluxes:
+C    Note: first version was using 2-m value: t2m,q2m,u2m,v2m
+C          instead of input fields: atemp,aqh,uwind,vwind
+            hs(i,j,bi,bj) = -atmcp*VKH(ij)*( VT2(ij)  - VT1(ij) )
+            hl(i,j,bi,bj) = -flamb*VKH(ij)*( VSH2(ij) - VSH1(ij) )
+C    Convert from kg/m^2/s to m/s via rhoConstFresh
             evap(i,j,bi,bj) = recip_rhoConstFresh
-     &                       *VKH(ij)*( VSH2(ij) - q2m(ij) )
+     &                       *VKH(ij)*( VSH2(ij) - VSH1(ij) )
 c         IF ( useAtmWind .AND. useRelativeWind ) THEN
 c         ELSEIF ( useAtmWind ) THEN
-c          tmpbulk =  tau(i,j)*rd(i,j)
-c          ustress(i,j,bi,bj) = tmpbulk*uwind(i,j,bi,bj)
-c          vstress(i,j,bi,bj) = tmpbulk*vwind(i,j,bi,bj)
-            ustress(i,j,bi,bj) = VKM(ij)*u2m(ij)
-            vstress(i,j,bi,bj) = VKM(ij)*v2m(ij)
+            ustress(i,j,bi,bj) = VKM(ij)*VUS(ij)
+            vstress(i,j,bi,bj) = VKM(ij)*VVS(ij)
 c         ENDIF
-
            ELSE
 C-    else if ( maskC(i,j,ks,bi,bj) <> 1 )
             ustress(i,j,bi,bj) = 0. _d 0
