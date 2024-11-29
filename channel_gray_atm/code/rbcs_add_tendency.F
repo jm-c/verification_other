@@ -13,7 +13,10 @@ C !DESCRIPTION:
 C     Add to tendency array the contribution from 3-D field relaxation
 
 C !USES: ===============================================================
+#ifdef ALLOW_ATM_PHYS
+      use  constants_mod, only:  rdgas, rvgas
       use  simple_Sat_Vapor_Pres_Mod, ONLY: ESCOMP
+#endif
       IMPLICIT NONE
 #include "SIZE.h"
 #include "EEPARAMS.h"
@@ -54,7 +57,9 @@ C  i,j            :: loop indices
 #endif
 #ifdef ALLOW_ATM_PHYS
       _RL conv_theta2T
+      _RL d622, d378, pmes
       _RL temp(0:sNx+1,0:sNy+1)
+      _RL esat(0:sNx+1,0:sNy+1)
       _RL qSat(0:sNx+1,0:sNy+1)
 #endif
 CEOP
@@ -110,6 +115,8 @@ CEOP
 #ifdef ALLOW_ATM_PHYS
 C-- addition starts
        IF ( useAtm_Phys ) THEN
+        d622 = rdgas/rvgas
+        d378 = 1. _d 0 -d622
         conv_theta2T = (rC(k)/atm_po)**atm_kappa
         DO j=0,sNy+1
          DO i=0,sNx+1
@@ -119,7 +126,18 @@ c         Temp(i,j) = theta(i,j,k,bi,bj)*conv_theta2T
      &                )*conv_theta2T
          ENDDO
         ENDDO
-        CALL ESCOMP( Temp, qSat )
+        CALL ESCOMP( Temp, esat )
+        DO j=0,sNy+1
+         DO i=0,sNx+1
+          pmes = rC(k) - d378*esat(i,j)
+          IF ( pmes .GT. zeroRL ) THEN
+           qSat(i,j) = d622*esat(i,j)/pmes
+           qSat(i,j) = MAX( qSat(i,j), zeroRL )
+          ELSE
+           qSat(i,j) = 0. _d 0
+          ENDIF
+         ENDDO
+        ENDDO
         DO j=0,sNy+1
          DO i=0,sNx+1
            RBCsalt(i,j,k,bi,bj) = 0.8 _d 0*qSat(i,j)
