@@ -341,7 +341,8 @@ c    &      lw_down_3d(1,1,15), lw_down_3d(1,sNy,15)
           rad_dt_tg = tdt3d
           CALL RADIATION_UP(
      I                   sNx,sNy, myTime, lat2d, pHalf3d, t_surf, t3d,
-     U                   tdt3d, lw_net_3d, sw_net_3d,
+     U                   tdt3d,
+     O                   lw_net_3d, sw_net_3d,
      I                   albedo_2d, ozoneColmn, dtrans_3d, dtrans_win,
      I                   b_3d, b_win, lw_down_3d, sw_down_3d, myThid )
 
@@ -352,6 +353,8 @@ c    &      tdt3d(1,1,15)*86400., tdt3d(1,sNy,15)*86400.
           rad_dt_tg = tdt3d - rad_dt_tg
         ELSE
           rad_dt_tg = 0.
+          lw_net_3d = 0.
+          sw_net_3d = 0.
         ENDIF
 
         IF (turb) THEN
